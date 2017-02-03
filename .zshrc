@@ -2,6 +2,7 @@ export EDITOR='nano'
 
 alias vi='nano'
 alias vim='nano'
+#alias vim="stty stop '' -ixoff ; vim"
 
 alias please='sudo'
 alias fucking='sudo'
@@ -28,21 +29,18 @@ compdef vman="man"
 alias todo='grep -IrHn TODO'
 
 #dev
-#export EDITOR='vim'
-alias vi='vim'
 alias vimconfig='$EDITOR ~/.vimrc'
-#alias vim="stty stop '' -ixoff ; vim"
 dev="Makefile\|\.mk$\|\.[ch]$\|\.[ch]pp$\|\.frag$\|\.vert$"
 dev+="\|\.lua$\|\.py$\|\.s$\|\.lst$"
-alias -s c='vim' cpp='vim' tpp='vim' h='vim' hpp='vim' mk='vim'
-alias -s lua='vim' frag='vim' vert='vim'
+alias -s c='nano' cpp='nano' tpp='nano' h='nano' hpp='nano' mk='nano'
+alias -s lua='nano' frag='nano' vert='nano'
 alias -s mp3='vlc'
 
 #alias lessh='LESSOPEN="| source-highlight %s -o STDOUT" less -M '
 
 alias filter-sed='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
 alias Makefile='$EDITOR Makefile'
-alias readme='vim `ls -R | grep -i readme`'
+alias readme='nano `ls -R | grep -i readme`'
 alias sloc='xargs wc -l'
 alias find-sloc='find . -type f | grep $dev | sloc | column | grep "[0-9]* "'
 alias wrap-column="sed -e 's/.\{'$(($COLUMNS/2-4))'\}/&\n/g' | column"
