@@ -1,10 +1,15 @@
+export EDITOR='nano'
+
+alias vi='nano'
+alias vim='nano'
+
 alias please='sudo'
 alias fucking='sudo'
 
 alias zsh-update='source ~/.zshrc'
-alias zshconfig='vim ~/.zshrc && zsh-update'
-alias zshenv='vim ~/.zshenv && zsh-update'
-alias tmuxconfig='vim ~/.tmux.conf && tmux source-file ~/.tmux.conf'
+alias zshconfig='$EDITOR ~/.zshrc && zsh-update'
+alias zshenv='$EDITOR ~/.zshenv && zsh-update'
+alias tmuxconfig='$EDITOR ~/.tmux.conf && tmux source-file ~/.tmux.conf'
 alias win32-gcc='x86_64-w64-mingw32-gcc-win32'
 alias win32-g++='x86_64-w64-mingw32-g++-win32'
 
@@ -23,20 +28,20 @@ compdef vman="man"
 alias todo='grep -IrHn TODO'
 
 #dev
-export EDITOR='vim'
+#export EDITOR='vim'
 alias vi='vim'
-alias vimconfig='vim ~/.vimrc'
-alias vim="stty stop '' -ixoff ; vim"
+alias vimconfig='$EDITOR ~/.vimrc'
+#alias vim="stty stop '' -ixoff ; vim"
 dev="Makefile\|\.mk$\|\.[ch]$\|\.[ch]pp$\|\.frag$\|\.vert$"
 dev+="\|\.lua$\|\.py$\|\.s$\|\.lst$"
 alias -s c='vim' cpp='vim' tpp='vim' h='vim' hpp='vim' mk='vim'
 alias -s lua='vim' frag='vim' vert='vim'
 alias -s mp3='vlc'
 
-alias lessh='LESSOPEN="| source-highlight %s -o STDOUT" less -M '
+#alias lessh='LESSOPEN="| source-highlight %s -o STDOUT" less -M '
 
 alias filter-sed='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
-alias Makefile='vim Makefile'
+alias Makefile='$EDITOR Makefile'
 alias readme='vim `ls -R | grep -i readme`'
 alias sloc='xargs wc -l'
 alias find-sloc='find . -type f | grep $dev | sloc | column | grep "[0-9]* "'
@@ -77,7 +82,8 @@ local new_manpath=(
 
 new_ldpath=(
 "$HOME/lib"
-"$HOME/Downloads/llvm/lib"
+"$HOME/workspace/boost_1_62_0/stage/lib/"
+# "$HOME/Downloads/llvm/lib"
 "/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu"
 "/usr/lib/python2.7/config-x86_64-linux-gnu"
 "/usr/local/lib"
@@ -99,26 +105,14 @@ export UPDATE_DELAY=$((1.0/$UPDATE_FPS))
 COMPLETION_WAITING_DOTS="true"
 plugins=(git gitfast github wd zsh-_url-httplink)
 
-ZSH_THEME="bullet-train/bullet-train"
-BULLETTRAIN_PROMPT_SEPARATE_LINE=false
-BULLETTRAIN_PROMPT_ADD_NEWLINE=false
-BULLETTRAIN_STATUS_BG=black
-BULLETTRAIN_EXEC_TIME_FG=cyan
-BULLETTRAIN_EXEC_TIME_BG=black
-BULLETTRAIN_TIME_BG=black
-BULLETTRAIN_TIME_FG=white
-BULLETTRAIN_NVM_FG=white
-BULLETTRAIN_NVM_BG=black
-BULLETTRAIN_PROMPT_ORDER=( time status custom context \
-	dir go git hg cmd_exec_time )
+# ZSH_THEME="bullet-train/bullet-train"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 export ZSH=~/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 unalias grep
 alias grep='grep --color=auto'
-# source ~/.tmuxinator.zsh
 source ~/.zshenv
-source ~/bin/completions/tmuxinator.zsh
 
 export PROMPT="$(tr -d '\n' <<< $PROMPT)"
 export PS1="$(tr -d '\n' <<< $PS1)"
@@ -126,7 +120,7 @@ export PS2="$(tr -d '\n' <<< $PS2)"
 export PS3="$(tr -d '\n' <<< $PS3)"
 export PS4="$(tr -d '\n' <<< $PS4)"
 
-pidof thd >/dev/null || sudo ~/bin/thd.sh
+#pidof thd >/dev/null || sudo ~/bin/thd.sh
 #if [ -z "$STARTED_THD" ]; then
 #	sudo ~/bin/thd.sh && export STARTED_THD=1
 #	# sudo ~/bin/thd.sh && STARTED_THD=1
