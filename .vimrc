@@ -187,6 +187,12 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'jez/vim-superman'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'airblade/vim-gitgutter'
+
+hi GitGutterAdd cterm=inverse
+hi GitGutterChange cterm=inverse
+hi GitGutterDelete cterm=inverse
+hi GitGutterChangeDelete cterm=inverse
 
 set guifont=FuraMono-Medium\ Powerline\ 10
 let g:airline_powerline_fonts=1

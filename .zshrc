@@ -25,7 +25,7 @@ alias compgen='sort -u <(ls $path 2>/dev/null) <(zsh-functions) <(zsh-aliases)'
 alias compgrep='compgen | grep'
 alias listgrep='list $@ | grep'
 
-compdef vman="man"
+# compdef vman="man"
 alias todo='grep -IrHn TODO'
 
 #dev
@@ -65,6 +65,7 @@ alias -s org='firefox'
 #env
 local new_path=(
 "$HOME/bin"
+"/usr/bin/core_perl"
 "/usr/local/sbin"
 "/usr/local/bin"
 "/usr/sbin"
@@ -101,6 +102,13 @@ export UPDATE_FPS=10
 export UPDATE_DELAY=$((1.0/$UPDATE_FPS))
 
 COMPLETION_WAITING_DOTS="true"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(background_jobs context dir)
+POWERLEVEL9K_DIR_HOME_BACKGROUND='black'
+POWERLEVEL9K_DIR_HOME_FOREGROUND='white'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='black'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='white'
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='black'
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='white'
 plugins=(git gitfast github wd zsh-_url-httplink)
 
 # ZSH_THEME="bullet-train/bullet-train"
@@ -109,7 +117,6 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 export ZSH=~/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 unalias grep
-alias grep='grep --color=auto'
 source ~/.zshenv
 
 export PROMPT="$(tr -d '\n' <<< $PROMPT)"
@@ -117,6 +124,9 @@ export PS1="$(tr -d '\n' <<< $PS1)"
 export PS2="$(tr -d '\n' <<< $PS2)"
 export PS3="$(tr -d '\n' <<< $PS3)"
 export PS4="$(tr -d '\n' <<< $PS4)"
+
+alias grep='grep --color=auto'
+alias ls='ls -p --color=tty'
 
 #pidof thd >/dev/null || sudo ~/bin/thd.sh
 #if [ -z "$STARTED_THD" ]; then
