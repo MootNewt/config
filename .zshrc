@@ -45,17 +45,11 @@ alias sloc='xargs wc -l'
 alias find-sloc='find . -type f | grep $dev | sloc | column | grep "[0-9]* "'
 alias wrap-column="sed -e 's/.\{'$(($COLUMNS/2-4))'\}/&\n/g' | column"
 
-#apt
-alias autoremove='_ apt-get autoremove'
-alias clean='_ apt-get clean'
-alias repo='_ add-apt-repository'
-alias dist-upgrade='_ apt-get dist-upgrade'
-alias install='_ apt-get install'
-alias purge='_ apt-get purge'
-alias remove='_ apt-get remove'
-alias search='apt-cache search'
-alias update='_ apt-get update'
-alias upgrade='_ apt-get upgrade'
+#pacman
+alias install='_ pacman -S'
+alias remove='_ pacman -R'
+alias clean='_ pacman '-Sc'
+alias update='_ pacman '-Syyu'
 
 #net
 alias firefox='firefox --new-tab'
@@ -119,17 +113,17 @@ source $ZSH/oh-my-zsh.sh
 unalias grep
 source ~/.zshenv
 
+# Trim newlines from each prompt; fixes Bullet-Train bug (n/a for PL9K)
 export PROMPT="$(tr -d '\n' <<< $PROMPT)"
 export PS1="$(tr -d '\n' <<< $PS1)"
 export PS2="$(tr -d '\n' <<< $PS2)"
 export PS3="$(tr -d '\n' <<< $PS3)"
 export PS4="$(tr -d '\n' <<< $PS4)"
 
+# Aliases that should override OMZ go here
 alias grep='grep --color=auto'
-alias ls='ls -p --color=tty'
+alias ls='ls -Ap --color=tty'
 
-#pidof thd >/dev/null || sudo ~/bin/thd.sh
-#if [ -z "$STARTED_THD" ]; then
-#	sudo ~/bin/thd.sh && export STARTED_THD=1
-#	# sudo ~/bin/thd.sh && STARTED_THD=1
-#fi
+# Run exactly one instance of Triggerhappy
+# Add the script as NOPASSWD entry to /etc/sudoers to skip prompt
+pidof thd >/dev/null || sudo ~/bin/thd.sh
