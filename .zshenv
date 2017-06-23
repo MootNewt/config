@@ -1,7 +1,8 @@
-fpath=(~/bin/completions $fpath)
+#fpath=(~/bin/completions $fpath)
 
 zsh-functions(){
-	functions | sed -e "s/\([A-Za-z0-9_\-]\)[ ]*().*/\1/" -e "tx" -e "d" -e ":x"
+	functions | \
+		sed -e "s/\([A-Za-z0-9_\-]\)[ ]*().*/\1/" -e "tx" -e "d" -e ":x"
 }
 zsh-aliases(){
 	alias | sed -e "s/^\([A-Za-z0-9_\-]*\)=.*/\1/" -e "tx" -e "d" -e ":x"
@@ -21,26 +22,26 @@ vman(){
 		-c "%y z | bd | set buftype=nofile | 0put=@z | %!sed 's/    / /g'"
 }
 
-columnate(){
-	delim=${1:-' '}
-	delim_size=${#delim}
-	fill=${3:-' '}
-	fill_size=${#fill}
-	M=${2:-$COLUMNS}
-	sep_pre="\e[7m"
-	sep_post="\e[0m"
-	N=$(($M/2-$delim_size-${#sep_pre}-${#sep_post}))
-
-	while read i; do
-		lhs=${i%%$1*}; rhs=${i#*$1}; sep=$delim
-		while [ -n "$lhs$rhs" ]; do
-			lhs_head=${lhs:0:$N}; rhs_head=${rhs:0:$N}
-			printf "%"$N"s"$sep_pre"%"$delim_size"s"$sep_post"%-"$N"s\n" \
-				"$lhs_head" "$sep" "$rhs_head"
-			lhs=${lhs:$N}; rhs=${rhs:$N}; sep=
-		done
-	done
-}
+# columnate(){
+# 	delim=${1:-' '}
+# 	delim_size=${#delim}
+# 	fill=${3:-' '}
+# 	fill_size=${#fill}
+# 	M=${2:-$COLUMNS}
+# 	sep_pre="\e[7m"
+# 	sep_post="\e[0m"
+# 	N=$(($M/2-$delim_size-${#sep_pre}-${#sep_post}))
+#
+# 	while read i; do
+# 		lhs=${i%%$1*}; rhs=${i#*$1}; sep=$delim
+# 		while [ -n "$lhs$rhs" ]; do
+# 			lhs_head=${lhs:0:$N}; rhs_head=${rhs:0:$N}
+# 			printf "%"$N"s"$sep_pre"%"$delim_size"s"$sep_post"%-"$N"s\n" \
+# 				"$lhs_head" "$sep" "$rhs_head"
+# 			lhs=${lhs:$N}; rhs=${rhs:$N}; sep=
+# 		done
+# 	done
+# }
 
 find-definitions(){
 	{ [ -z $1 ] && find include -type f || find $1 -type f } |
@@ -248,4 +249,14 @@ progress(){
 battery(){
 	bat1=/sys/class/power_supply/BAT1
 	progress $(cat $bat1/charge_now) $(cat $bat1/charge_full)
+}
+
+web-search(){
+	query="$1"; shift
+	first=1
+	for arg in $*; do
+		[ $first -eq 1 ] && first=0 || query+='+'
+		query+=$arg
+	done
+	firefox "$query"
 }
