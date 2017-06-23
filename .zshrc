@@ -167,11 +167,11 @@ ZSH_THEME="bullet-train/bullet-train"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 
 if [ "$ZSHRC_SOURCED" -eq 0 ] || [ "$ZSHRC_FORCE" -eq 1 ]; then
+	export ZSH=~/.oh-my-zsh
 	source $ZSH/oh-my-zsh.sh
 fi
 export ZSHRC_SOURCED=$((ZSHRC_SOURCED+1))
 
-# export ZSH=~/.oh-my-zsh
 # source $ZSH/oh-my-zsh.sh
 # unalias grep
 
