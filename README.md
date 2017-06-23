@@ -1,4 +1,4 @@
-# Config
+# Config 
 
 Back up your tracked files by adding them to tracked.conf and running `make`.
 
